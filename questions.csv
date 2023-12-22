@@ -1,0 +1,77 @@
+category,Question,Good answers include,RK thoughts
+Research Strategy,Which cell lines have high dependency for the target of interest for the gene POLR3E?,"Explains where to look in the Depmap database, or other avenues, and how to search","Shouldn't include the database name, more about the question and then where it finds the answer"
+Research Strategy,Which indications are the dependent cell lines for the gene POLR3E enriched in? Are there lineages with high selectivity?,,
+Research Strategy,Is there a concordance in the variant profile seen in cell lines with that of patients for the gene POLR3E?,,
+Research Strategy,Describe associations between expression and variant profiles for the gene POLR3E.,,
+Research Strategy,"Have cell lines been used in other studies for the target of interest of the gene POLR3E? If experimental data is available on NCBI GEO, provide those links or analysis within the platform.",,
+Patient Stratification,"For the gene POLR3E, identify indications with significant differential expression in cancer vs normal tissue. Is it overexpressed or underexpressed in tumor tissue?",,
+Patient Stratification,"Describe the variant profile of tissues where there is significant differential expression for the gene POLR3E. Include details on copy number variations, mutations, etc.",,"Should detail out the ""etc"" portion"
+Patient Stratification,Are there specific regions of the protein of the gene POLR3E where mutations occur at a higher frequency?,,
+Patient Stratification,"For the gene POLR3E, determine how many of the mutations are pathogenic.",,
+Patient Stratification,Are pathogenicity scores of mutations or copy number profiles associated with cancer progression and survival for the gene POLR3E?,,
+Market Research,Identify any therapeutic areas or platforms in focus for the gene POLR3E.,"Explain specific areas including CAR-T, TPD",Take out (like xxx) and should make that part of the evaluation of the answer
+Market Research,"List molecules in clinical trials for the gene POLR3E, detailing the pharmaceutical companies involved and the latest status of these trials.",Can determine where to search and what answers are most relevant,"This is a data search question, so we should have an idea of what's a good answer"
+Market Research,Which indications have drugs already in the market for the gene POLR3E?,Can determine where to search and what answers are most relevant,Also a search question
+Market Research,Are there any first in class opportunities for the gene POLR3E?,,
+General understanding,How do you determine which genes or proteins to target for a new therapeutic?,"Criteria for target selection (disease relevance, druggability, etc.), data sources (literature, databases, bioinformatics).",
+General understanding,What methods can be used to validate a potential biomarker for a specific disease?,"Experimental approaches (ELISA, mass spectrometry), statistical validation (sensitivity, specificity, predictive value).",
+General understanding,Explain how pathway analysis can be integrated into drug discovery.,"Bioinformatics tools for pathway analysis, interpretation of pathway perturbations due to drug interactions.",
+General understanding,How does phenotypic screening complement genotypic screening in drug discovery?,"Differences in methodologies, advantages of each approach in discovering drug candidates.",
+General understanding,What are the main challenges in translating in vitro findings to in vivo models?,"Issues like bioavailability, pharmacokinetics, pharmacodynamics, strategies to overcome these challenges.",
+General understanding,Discuss how structural biology can aid in the design of a new drug.,"Role of structural biology in understanding target-drug interactions, techniques like X-ray crystallography, NMR.",
+Gene Overview,"Provide a summary of the gene POLR3E, including its functions, mechanisms, and classifications. ",Links to curated online databases such as GeneCards or NCBI and information on how to extract the data,"Break down the questions into individual bits - against functions, mechanisms, classifications. 
+Remove mention of the databases, we want to see which ones the LLM pulls up"
+Gene Overview,"Summarize the direct or indirect role of the gene POLR3E in cancer, detailing its mechanisms and interactions with other genes.",,
+Gene Overview,Determine if the gene POLR3E is an oncogene,If the answer explains how to check if the gene is an oncogene in established human disease databases,"Take out part about ""established human disease databases"" let's see what the response is. Then maybe add a separate question about how you might confirm this response."
+Gene Overview,Identify the cancer indications or types that the gene POLR3E has been associated with.,,
+Gene Overview,Provide relevant networks from any relevant database for the known mechanism and interactions of the gene POLR3E.,Explains it within StringDB and explains how the information can be retrieved,We should take out DB name probably and ask it to name the database and find mechanism and interactions
+Gene Overview,"List key publications related to the gene POLR3E, providing links where available.",,
+Gene Overview,Give me a list of pseudokinase genes ,,
+Detailed understanding,Propose a strategy to use CRISPR-Cas9 for editing a gene implicated in Alzheimer's disease,"Genes such as APP or PSEN1 in a human neuronal cell line. Outline the design of guide RNAs for precise gene editing, and the strategy to screen for successful gene edits. Discuss the potential off-target effects and how to assess the specificity of the CRISPR system ",
+Detailed understanding,Develop a series of siRNA sequences to target and knock down a specific oncogene,"e.g., KRAS. The siRNA should be designed for high specificity and efficiency. How would you ensure minimal off-target effects and maximal knockdown efficacy? Additionally, discuss the approach for validating the knockdown efficiency using qRT-PCR and Western blot techniques.",
+Detailed understanding,Design a high-throughput screening (HTS) assay to identify small molecule inhibitors of a novel protein target believed to be involved in cancer cell proliferation,"Explain how you would validate the target protein's role in cancer, select a suitable assay format (e.g., cell-based, biochemical), and discuss the criteria for hit selection and validation in this assay.",
+Detailed understanding,Propose a strategy for developing an antibody-drug conjugate targeting a specific antigen overexpressed in a type of breast cancer,"Detail the selection process for the antibody, the choice of cytotoxic drug, and the linker technology. Also, discuss how you would evaluate the specificity, efficacy, and safety of the ADC in preclinical models.",
+Detailed understanding,Outline a pharmacokinetic study design for a new oral antidiabetic drug,"Describe the considerations for dose selection, the route of administration, and the parameters to be measured (e.g., absorption, distribution, metabolism, excretion). Also, discuss how the pharmacokinetic data would be used to inform dosing regimens and subsequent clinical trials.",
+Detailed understanding,Describe the process of building a chemogenomics model to predict drug-target interactions.,"Data integration (chemical structures, genomic data), modeling techniques (machine learning, docking studies).",
+Detailed understanding,How can computational models predict off-target effects of potential drug candidates?,"Use of databases and algorithms to predict drug-target interactions, assessment of side effect profiles.",
+Detailed understanding,What considerations are taken into account when selecting a delivery method for a new drug?,"Drug properties (solubility, stability), target site characteristics, potential for controlled release.",
+Detailed understanding,Describe a strategy to screen for synergistic effects between drug candidates.,"Experimental design for combination screens, analysis of data to identify synergy (e.g., Loewe additivity, Bliss independence).",
+Compbio process detail,Which mutations in PAS domain for the target protein exhibit high selectivity for the prostate cancer cell lines?,"Mutation data. Get protein sequence data from protein data bank and identify amino acids in the PAS domain.
+Identify prostate cancer cell lines with mutations in the PAS domain. Report ones that have high selectivity in prostate cancer.
+",
+Compbio process detail,Which BRCA gene structural variants in the ordered region affect its interaction with the paralogs?," Variant profile with gene networks. Get BRCA gene ordered region sequence information from protein data bank.
+Get normal gene interaction network for BRCA from StringDB.
+Identify reported structural variants in BRCA gene paralogs in cell lines (depmap) and patients (tcga).
+Build geneset networks and compare with normal (code in python or cystoscape). Report variants with significant differences.
+",
+Compbio process detail,Which tissues in patients have gene set enrichment profile similar to experiment in NCBI GEO ID GSE249645?,"Names of tissues. Get data for the experiment from NCBI GEO database and perform differential expression analysis and gene set enrichment.
+Perform gene set enrichment for tumor vs normal tissues in the patients.
+Report concordance between the results for tissues.",
+Compbio process detail,"Which protein domains of the target are enriched for pathogenic mutations in the breast cancer patients?
+",Protein domain information for the frequency of mutations,
+,"Combination of SMARCA2 and SMARCA4: summary of genes, gene ontology, biological function, mechanism, role in disease.",,
+,Disease mechanism for combination of SMARCA2 and SMARCA4.,,
+,Interaction networks for SMARCA2 and SMARCA4 in stringdb.,,
+,Relationship between dependency scores of SMARCA2 and SMARCA4 in DepMapDB.,,
+,Relationship between SMARCA2 mutation status and SMARCA2 dependency; relationship between SMARCA4 mutation status and SMARCA4 dependency.,,
+,Relationship between SMARCA2 copy number status and SMARCA2 dependency; relationship between SMARCA4 copy number status and SMARCA4 dependency.,,
+,Relationship between SMARCA2 mutation status and SMARCA4 dependency and vice versa.,,
+,Relationship between SMARCA2 copy number status and SMARCA4 dependency and vice versa.,,
+,Expression comparison between tumor vs normal tissue for SMARCA2 and SMARCA4 in patients.,,
+,Relationship between expression of copy number of SMARCA2 and SMARCA4.,,
+,Relationship between expression and mutation status of SMARCA2 and SMARCA4.,,
+,Relationship between expression status of SMARCA2 and mutation status of SMARCA4 and vice versa.,,
+,Relationship between expression status of SMARCA2 and copy number status of SMARCA4 and vice versa.,,
+,Domain-wise frequency of pathogenic mutations for SMARCA2 and SMARCA4 from UniProt.,,
+,"Summary of JAK1, gene ontology, biological function, mechanism, role in disease.",,
+,Disease mechanism for JAK1.,,
+,Interaction networks for JAK1 in stringdb.,,
+,Relationship between dependency scores of JAK1 in DepMapDB.,,
+,Relationship between JAK1 mutation status and JAK1 dependency.,,
+,Relationship between JAK1 copy number status and JAK1 dependency.,,
+,Expression comparison between tumor vs normal tissue for JAK1 in patients.,,
+,Relationship between expression of copy number of JAK1.,,
+,Relationship between expression and mutation status of JAK1.,,
+,Relationship between expression status of JAK1 and mutation status of JAK1.,,
+,Relationship between expression status of JAK1 and copy number status of JAK1.,,
+,Domain-wise frequency of pathogenic mutations for JAK1 from UniProt.,,
