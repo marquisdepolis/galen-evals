@@ -41,10 +41,10 @@ def merge_on_contains(big_df, small_df, big_col, small_col):
     return big_df
 
 # Load the files
-questions_file_path = 'questions.xlsx' 
-llmresults_file_path = 'results_grouped_by_model.xlsx'
-gpt4results_csv_path = 'results_gpt4.xlsx'
-results_file_path = 'allresults_grouped_by_model.xlsx'
+questions_file_path = 'files/questions.xlsx' 
+llmresults_file_path = 'files/results_grouped_by_model.xlsx'
+gpt4results_csv_path = 'files/results_gpt4.xlsx'
+results_file_path = 'files/allresults_grouped_by_model.xlsx'
 
 create_combined_csv(llmresults_file_path, gpt4results_csv_path, results_file_path)
 
@@ -85,4 +85,4 @@ pivoted_data = merged_df.pivot(index=['Question', 'category'], columns='Model', 
 # Resetting index to make 'Question' and 'category' columns again
 pivoted_data.reset_index(inplace=True)
 
-pivoted_data.to_excel('results_grouped_by_question.xlsx', index=False)
+pivoted_data.to_excel('files/results_grouped_by_question.xlsx', index=False)

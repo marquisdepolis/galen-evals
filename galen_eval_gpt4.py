@@ -33,7 +33,7 @@ assistant = client.beta.assistants.create(
 show_json(assistant)
 
 def read_csv(file_path):
-    return pd.read_csv(file_path)
+    return pd.read_excel(file_path)
 
 def process_data_for_function(data):
     prompts = []
@@ -70,15 +70,15 @@ def write_responses_to_csv(responses, output_file_path):
         response_clean = '"' + response_clean.replace('"', '""') + '"'
         formatted_responses.append(response_clean)
 
-    # Save to CSV
-    pd.DataFrame({'Evaluation of responses from GPT-4': formatted_responses}).to_csv(output_file_path, index=False)
+    # Save to file
+    pd.DataFrame({'Evaluation of responses from GPT-4': formatted_responses}).to_excel(output_file_path, index=False)
 
 def write_responses_to_csv(responses, output_file_path):
     # Replace newline characters with a delimiter
     formatted_responses = [' '.join(response.splitlines()) for response in responses]
-    pd.DataFrame({'Evaluation of responses from GPT-4': formatted_responses}).to_csv(output_file_path, index=False)
+    pd.DataFrame({'Evaluation of responses from GPT-4': formatted_responses}).to_excel(output_file_path, index=False)
 
-file_path = 'results_grouped_by_question.csv'
+file_path = 'files/results_grouped_by_question.xlsx'
 data = read_csv(file_path)
 prompts = process_data_for_function(data)
 
@@ -91,18 +91,18 @@ for prompt in prompts:
     print(response)
     responses.append(' '.join(response))
 
-output_file_path = 'gpteval_output.csv' 
+output_file_path = 'files/gpteval_output.xlsx'
 write_responses_to_csv(responses, output_file_path)
 
 # Post processing and combining all files
-results_grouped_path = 'results_grouped_by_question.csv'
-gpteval_output_df = pd.read_csv(output_file_path)
-results_grouped_df = pd.read_csv(results_grouped_path)
+results_grouped_path = 'files/results_grouped_by_question.xlsx'
+gpteval_output_df = pd.read_excel(output_file_path)
+results_grouped_df = pd.read_excel(results_grouped_path)
 
 if len(gpteval_output_df) == len(results_grouped_df):
     combined_df = pd.concat([results_grouped_df, gpteval_output_df], axis=1)
 
-    combined_csv_path = 'galen_llmeval_results.csv'
-    combined_df.to_csv(combined_csv_path, index=False)
+    combined_csv_path = 'files/galen_combined_results.xlsx'
+    combined_df.to_excel(combined_csv_path, index=False)
 else:
     print("The lengths of the dataframes do not match. Cannot combine.")
