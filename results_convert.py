@@ -1,4 +1,11 @@
 import pandas as pd
+from difflib import SequenceMatcher
+
+def clean_text(text):
+    """
+    Remove non-ASCII characters from the text.
+    """
+    return ''.join(char for char in text if char.isascii())
 
 def create_combined_csv(original_csv_path, interim_csv_path, combined_csv_path):
     # Read the original and interim data
@@ -49,6 +56,7 @@ merged_df = merge_on_contains(results_df, questions_df, 'Question', 'Question')
 
 merged_df['Question'] = merged_df['Question'].str.replace(r'\\"', '', regex=True)
 merged_df['Question'] = merged_df['Question'].str.replace(r'"', '', regex=True)
+merged_df['Question'] = merged_df['Question'].apply(clean_text)
 
 # Pivoting the data
 pivoted_data = merged_df.pivot(index=['Question', 'category'], columns='Model', values='Response')
