@@ -8,21 +8,23 @@ Evals for Drug Discovery
 
 # Steps
 1. Update the config.json if needed
-2. Run the galen_llm_responses.ipynb to get various OSS LLM responses, choose the ones you want in the code
-3. Run galen_gpt_response.py to get GPT-4 responses
+2. Run the responses_llm.ipynb to get various OSS LLM responses, choose the ones you want in the code
+3. Run response_gpt4.ipynb to get GPT-4 responses
 4. Run results_convert.py to change format, since right now it's using csv files
-5. Run galen_eval_gpt4.py to get GPT-4 to evaluate the answers
+5. Run eval_gpt4.py to get GPT-4 to evaluate the answers
+6. Run eval_local_ranking.ipynb to extract rankings from the evaluation
 
 # Files
 The crucial ones are:
-1. questions.csv, which has the list of Questions we want to ask
-2. galen_llmeval_results.csv which has the final list of answers and evaluations from GPT-4
-3. All other files are intermediate creations, kept for easy auditijg
+1. questions.xlsx, which has the list of Questions we want to ask
+2. galen_llmeval_results.xlsx which has the final list of answers and evaluations from GPT-4
+3. output.json with the rankings for the final list of answers that were evaluated
+4. All other files are intermediate creations, kept for easy auditing
 
 # To do
 There's plenty to do, since it's a simple implementation, but in no order:
-1. Change storage from csv to something better, and store them inside folders
-2. Clean up the answer formatting
+1. Change storage from csv to something better, and store them inside folders [Done]
+2. Clean up the answer formatting [Done]
 3. Speed up GPT execution by parallelising the API calls
 4. Add checks against local files for specific models
 5. Create a "Best Answer" for the questions in case we want to measure the answers against that
