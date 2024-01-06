@@ -18,7 +18,7 @@ Evals for Drug Discovery
 The crucial ones are:
 1. questions.xlsx, which has the list of Questions we want to ask
 2. galen_llmeval_results.xlsx which has the final list of answers and evaluations from GPT-4
-3. output.json with the rankings for the final list of answers that were evaluated
+3. model_rankings.xlsx with the rankings for the final list of answers that were evaluated
 4. All other files are intermediate creations, kept for easy auditing
 
 # To do
