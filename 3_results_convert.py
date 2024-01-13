@@ -60,6 +60,8 @@ results_df = pd.read_excel(results_file_path)
 
 # Ensure the total number of questions in results_grouped_by_model.xlsx is a multiple of the number in questions.xlsx
 if len(results_df) % len(questions_df) != 0:
+    print(len(results_df))
+    print(len(questions_df))
     raise ValueError("The total number of questions in results_grouped_by_model.xlsx must be a multiple of the number in questions.xlsx.")
 
 # Replace questions in results_grouped_df with those from questions_df
@@ -84,7 +86,6 @@ merged_df = merge_on_contains(results_df, questions_df, 'Question', 'Question')
 # merged_df['Question'] = merged_df['Question'].str.replace(r'\s+', ' ', regex=True)
 # # Remove leading and trailing whitespaces
 # merged_df['Question'] = merged_df['Question'].str.strip()
-
 # Pivoting the data
 pivoted_data = merged_df.pivot(index=['Question', 'category'], columns='Model', values='Response')
 

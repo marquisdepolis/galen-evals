@@ -27,7 +27,7 @@ def show_json(obj):
     print(json.loads(obj.model_dump_json()))
 
 assistant = client.beta.assistants.create(
-    name="Galen LLM Evaluator",
+    name=f"{F_NAME} LLM Evaluator",
     instructions=INSTRUCTION,
     model=GPT_MODEL,
 )
