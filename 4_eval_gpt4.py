@@ -36,14 +36,24 @@ show_json(assistant)
 def read_csv(file_path):
     return pd.read_excel(file_path)
 
+template = {
+ "Model": [
+  {"Name": "mistral-7b", "Ranking": ""},
+  {"Name": "llama2-70b", "Ranking": ""},
+  {"Name": "qwen-14b", "Ranking": ""},
+  {"Name": "yi-34b", "Ranking": ""},
+  {"Name": "mixtral-instruct", "Ranking": ""},
+  {"Name": "falcon-40b", "Ranking": ""},
+  {"Name": "gpt-4-1106", "Ranking": ""},
+  {"Name": "deepseek_33bq", "Ranking": ""}
+ ]
+}
 def process_data_for_function(data):
     prompts = []
     for _, row in data.iterrows():
         question = row['Question']
         answers = [f"Model {model}: {answer}" for model, answer in row.items() if model != 'Question' and pd.notna(answer)]
-        prompt = (f"{INSTRUCTION} Please read the following question and the replies from different Models. "
-                  "Then I need you to give a ranking (like Model 1: 6, Model 2: 1, Model 3: 5 etc.) with a succinct "
-                  f"summary sentence at the end about pros and cons of each.\n\nQuestion: {question}\n" + "\n".join(answers))
+        prompt = (f"{INSTRUCTION} Please read the following question and the replies from different Models. Then I need you to give a ranking like \n {template}. \n Add a very short succinct summary sentence at the end about overall impressions and pros/cons.\n\nQuestion: {question}\n" + "\n".join(answers))
         prompts.append(prompt)
     return prompts
 
