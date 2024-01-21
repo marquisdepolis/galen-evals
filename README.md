@@ -7,7 +7,7 @@ Evals for Drug Discovery
 3. Add them to your .env file
 
 # Steps
-1. Update the config.json if needed
+1. Update the config.json if needed. Oh and check the knowledgebase.json and perturbations.json to see if they have verisimilitude!
 2. Run the responses_llm.ipynb to get various OSS LLM responses, choose the ones you want in the code
 3. Run response_gpt4.ipynb to get GPT-4 responses
 4. Run results_convert.py to change format
