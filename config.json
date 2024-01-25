@@ -1,5 +1,5 @@
 {
     "name": "galen",
     "instructions": "You are an exceptional computational biologist and genomics expert and know everything about drug discovery.",
-    "GPT_MODEL": "gpt-4-1106-preview",
+    "GPT_MODEL": "gpt-4-1106-preview"
 }
