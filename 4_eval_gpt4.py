@@ -11,17 +11,12 @@ load_dotenv()
 
 client = OpenAI()
 
-GPT_MODEL = "gpt-4-1106-preview"
-from dotenv import load_dotenv
-load_dotenv()
-
-client = OpenAI()
-# Load the configuration file
 with open('config.json', 'r') as config_file:
     config = json.load(config_file)
 
 INSTRUCTION = config['instructions']
 F_NAME = config["name"]
+GPT_MODEL = config["GPT_MODEL"]
 
 def show_json(obj):
     print(json.loads(obj.model_dump_json()))
