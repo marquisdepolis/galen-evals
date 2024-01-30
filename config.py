@@ -1,4 +1,5 @@
 import json
+import importlib
 
 class Config:
     def __init__(self):
@@ -22,7 +23,7 @@ class Config:
                 'llmeval_results': f'{self.F_NAME}_llmeval_results.xlsx',
                 'model_rankings': f'{self.F_NAME}_model_rankings.xlsx',
             },
-            'db': {
+            'dbs': {
                 'questions': 'files/questions_db.xlsx',
                 'q_original': 'files/questions_original_db.xlsx',
                 'llmresults_file_path': f'files/{self.F_NAME}_results_grouped_by_model_db.xlsx',
@@ -58,5 +59,13 @@ class Config:
         else:
             raise ValueError(f"Invalid mode: {mode}")
 
+    def reset(self):
+        # Re-initialize or redefine the configuration settings
+        self.__init__()
+
 # Create a global instance
 config = Config()
+# Function to reset the config - can be called from other scripts
+def reset_config():
+    global config
+    config = Config()

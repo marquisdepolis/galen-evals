@@ -1,0 +1,240 @@
+{
+    "ccle_cn_gistic in files/db/CCLEGisticCNDB.db": [
+        {
+            "column_name": "Hugo_Symbol",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "CCLE_Name",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "gistic_cn",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "DepMap_ID",
+            "data_type": "VARCHAR"
+        }
+    ],
+    "ccle_mutation in files/db/CCLEMutDB.db": [
+        {
+            "column_name": "Hugo_Symbol",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Entrez_Gene_Id",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "NCBI_Build",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Chromosome",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Start_position",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "End_position",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Strand",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Variant_Classification",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Variant_Type",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Reference_Allele",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Alternate_Allele",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "dbSNP_RS",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "dbSNP_Val_Status",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Genome_Change",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Annotation_Transcript",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "DepMap_ID",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "cDNA_Change",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Codon_Change",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Protein_Change",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "isDeleterious",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "isTCGAhotspot",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "TCGAhsCnt",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "isCOSMIChotspot",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "COSMIChsCnt",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "ExAC_AF",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Variant_annotation",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "CGA_WES_AC",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "HC_AC",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "RD_AC",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "RNAseq_AC",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "SangerWES_AC",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "WGS_AC",
+            "data_type": "VARCHAR"
+        }
+    ],
+    "ccle_variants in files/db/CCLEVarDB.db": [
+        {
+            "column_name": "DepMap_ID",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Chrom",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Pos",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Ref",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Alt",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "AF",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "VariantType",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "VariantInfo",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "DNAChange",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "ProteinChange",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "gene_name",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Transcript",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "CCLEDeleterious",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "CosmicHotspot",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "AssociatedWith",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "LoF",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "Driver",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "LikelyDriver",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "LikelyGoF",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "LikelyLoF",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "VariantAnnotation",
+            "data_type": "VARCHAR"
+        },
+        {
+            "column_name": "copy_number",
+            "data_type": "VARCHAR"
+        }
+    ]
+}

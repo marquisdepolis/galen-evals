@@ -1,0 +1,29 @@
+Database name,Table name,Column name,Description
+DepMapDB,dep_crispr,DepMap_ID,Unique cell line identifier
+DepMapDB,dep_crispr,gene_name,gene name
+DepMapDB,dep_crispr,dep_crispr,crispr dependency score
+DepMapDB,dep_expr,DepMap_ID,Unique cell line identifier
+DepMapDB,dep_expr,gene_name,gene name
+DepMapDB,dep_expr,rna_expression,gene expression value
+DepMapDB,meta_cell_line,DepMap_ID,Unique cell line identifier
+DepMapDB,meta_cell_line,CCLEName,Name of the cell line
+DepMapDB,meta_cell_line,StrippedCellLineName,Shortened cell line name
+DepMapDB,meta_cell_line,OncotreeLineage,Tissue name
+CCLEMutDB,ccle_mutation,DepMap_ID,Unique cell line identifier
+CCLEMutDB,ccle_mutation,Hugo_Symbol,gene name
+CCLEMutDB,ccle_mutation,Variant_Classification,type of mutation
+CCLEMutDB,ccle_mutation,ProteinChange,amino acid variation
+CCLEMutDB,ccle_mutation,Variant_annotation,whether the mutation is silent or damaging
+CCLEMutDB,ccle_mutation,isDeleterious,whether the mutation is deleterious
+TCGAmutDB,Tables arranged alphabetically based on first letter of gene name,submitter_id,TCGA sample id
+TCGAmutDB,Tables arranged alphabetically based on first letter of gene name,Variant_Classification,type of mutation
+TCGAmutDB,Tables arranged alphabetically based on first letter of gene name,HGVSp_Short,amino acid variation
+TCGAmutDB,Tables arranged alphabetically based on first letter of gene name,polyphen_label,pathogenicity of the mutation
+TCGAmutDB,Tables arranged alphabetically based on first letter of gene name,gene_name,gene name
+TCGAcnvDB,Tables arranged alphabetically based on first letter of gene name,submitter_id,TCGA sample id
+TCGAcnvDB,Tables arranged alphabetically based on first letter of gene name,gistic_cn,gistic score for copy number variation
+TCGAcnvDB,Tables arranged alphabetically based on first letter of gene name,gene_name,gene name
+TCGAexprDB,Tables arranged alphabetically based on first letter of gene name,gene_name,gene name
+TCGAexprDB,Tables arranged alphabetically based on first letter of gene name,sample.id,TCGA sample id
+TCGAexprDB,Tables arranged alphabetically based on first letter of gene name,expression,gene expression value
+TCGAexprDB,Tables arranged alphabetically based on first letter of gene name,tissue,tissue name
