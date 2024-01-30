@@ -8,8 +8,10 @@ INSTRUCTION = config['instructions']
 F_NAME = config["name"]
 GPT_MODEL = config["GPT_MODEL"]
 
-perturbations = 'perturbations.json'
-knowledgebase = 'knowledgebase.json'
+perturbations = 'utils/perturbations.json'
+knowledgebase = 'utils/knowledgebase.json'
+db_layout = 'utils/database_description.json'
+
 q_file_path = 'files/questions.xlsx'
 q_original = 'files/questions_original.xlsx'
 llmresults_file_path = f'files/{F_NAME}_results_grouped_by_model.xlsx'
