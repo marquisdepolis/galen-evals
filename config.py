@@ -31,8 +31,8 @@ class Config:
                 'gpt4results_csv_path': f'files/{self.F_NAME}_results_gpt4_db.xlsx',
                 'results_file_path': f'files/{self.F_NAME}_allresults_grouped_by_model_db.xlsx',
                 'combined_file_path': f'files/{self.F_NAME}_results_grouped_by_question_db.xlsx',
-                'llmeval_results_db': f'{self.F_NAME}_llmeval_results_db.xlsx',
-                'model_rankings_db': f'{self.F_NAME}_model_rankings_db.xlsx',
+                'llmeval_results': f'{self.F_NAME}_llmeval_results_db.xlsx',
+                'model_rankings': f'{self.F_NAME}_model_rankings_db.xlsx',
             },
             'dynamic': {
                 'questions': 'files/questions_dynamic.xlsx',
@@ -41,8 +41,8 @@ class Config:
                 'gpt4results_csv_path': f'files/{self.F_NAME}_results_gpt4_dynamic.xlsx',
                 'results_file_path': f'files/{self.F_NAME}_allresults_grouped_by_model_dynamic.xlsx',
                 'combined_file_path': f'files/{self.F_NAME}_results_grouped_by_question_dynamic.xlsx',
-                'llmeval_results_dy': f'{self.F_NAME}_llmeval_results_dynamic.xlsx',
-                'model_rankings_dy': f'{self.F_NAME}_model_rankings_dynamic.xlsx',
+                'llmeval_results': f'{self.F_NAME}_llmeval_results_dynamic.xlsx',
+                'model_rankings': f'{self.F_NAME}_model_rankings_dynamic.xlsx',
             }
         }
         self.current_mode = None
