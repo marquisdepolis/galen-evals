@@ -11,6 +11,7 @@ class Config:
         self.perturbations = 'utils/perturbations.json'
         self.knowledgebase = 'utils/knowledgebase.json'
         self.db_layout = 'utils/database_description.json'
+        self.db_schema = 'utils/combined_schema.json'
         # Define file paths for each mode
         self.file_paths = {
             'default': {
