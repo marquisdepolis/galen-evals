@@ -91,6 +91,7 @@ def main():
     df_clustered, _ = cluster_models(df_with_ratings)
     
     # Visualize the clusters, potentially using PCA for a more insightful visualization
+    visualize_clusters(df_clustered)
     visualize_clusters_with_pca(df_clustered)
 
 if __name__ == "__main__":
