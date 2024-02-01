@@ -2,11 +2,7 @@ import re
 import pandas as pd
 from difflib import SequenceMatcher
 import json
-with open('config.json', 'r') as config_file:
-    config = json.load(config_file)
-
-INSTRUCTION = config['instructions']
-F_NAME = config["name"]
+from config import config
 
 def clean_text(text):
     """
@@ -47,10 +43,10 @@ def merge_on_contains(big_df, small_df, big_col, small_col):
     return big_df
 
 # Load the files
-questions_file_path = 'files/questions.xlsx' 
-llmresults_file_path = f'files/{F_NAME}_results_grouped_by_model.xlsx'
-gpt4results_csv_path = f'files/{F_NAME}_results_gpt4.xlsx'
-results_file_path = f'files/{F_NAME}_allresults_grouped_by_model.xlsx'
+questions_file_path = config.questions
+llmresults_file_path = config.llmresults_file_path
+gpt4results_csv_path = config.gpt4results_csv_path
+results_file_path = config.results_file_path
 
 create_combined_csv(llmresults_file_path, gpt4results_csv_path, results_file_path)
 
@@ -92,4 +88,4 @@ pivoted_data = merged_df.pivot(index=['Question', 'category'], columns='Model', 
 # Resetting index to make 'Question' and 'category' columns again
 pivoted_data.reset_index(inplace=True)
 
-pivoted_data.to_excel(f'files/{F_NAME}_results_grouped_by_question.xlsx', index=False)
+pivoted_data.to_excel(config.combined_file_path, index=False)

@@ -3,6 +3,7 @@ import pandas as pd
 import json
 import openai
 import requests
+from config import config
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 from termcolor import colored
 from openai import OpenAI
