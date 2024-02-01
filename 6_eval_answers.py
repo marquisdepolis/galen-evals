@@ -1,3 +1,4 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
@@ -33,26 +34,34 @@ def save_ratings(ratings_data, file_path='ratings.xlsx'):
     print(f"Ratings saved to {file_path}")
 
 def preprocess_data(df):
+    # Handle text data
+    vectorizer = TfidfVectorizer(max_features=100)  # Adjust max_features as needed
+    tfidf_matrix = vectorizer.fit_transform(df['Final Analysis Response'])
+    
+    # Create a DataFrame with the TF-IDF features
+    tfidf_df = pd.DataFrame(tfidf_matrix.toarray(), columns=vectorizer.get_feature_names_out())
+    
     # One-hot encode the "Category" column
     category_dummies = pd.get_dummies(df['Category'])
+    
     # Merge with the original dataframe
-    df_processed = pd.concat([df.drop('Category', axis=1), category_dummies], axis=1)
+    df_processed = pd.concat([df, tfidf_df, category_dummies], axis=1).drop(['Category', 'Final Analysis Response'], axis=1)
+    
     return df_processed
 
 def cluster_models(df, n_clusters=3):
-    # Assuming 'Model' is the identifier and not a feature for clustering
-    features = df.drop('Model', axis=1)
-    kmeans = KMeans(n_clusters=n_clusters, random_state=0).fit(features)
+    # Drop non-feature columns
+    non_feature_cols = ['Model', 'Question', 'Response', 'Perturbed Question', 'Perturbed Response', 'Final Analysis Question']
+    features = df.drop(non_feature_cols, axis=1, errors='ignore')  # errors='ignore' allows columns to be missing
     
-    # Add cluster labels to the dataframe
+    kmeans = KMeans(n_clusters=n_clusters, random_state=0).fit(features)
     df['Cluster'] = kmeans.labels_
     
     return df, kmeans
 
 def integrate_ratings_with_data(df, ratings_data):
-    # This is a placeholder function. You'll need to customize it based on how ratings relate to your data.
-    # Assume ratings_data is a DataFrame with a structure that can be directly merged with df.
-    df_with_ratings = pd.merge(df, ratings_data, on="SomeCommonIdentifier", how="left")
+    # Assuming ratings_data is a DataFrame with the same order as df
+    df_with_ratings = df.join(ratings_data)
     return df_with_ratings
 
 def visualize_clusters(df):
@@ -63,14 +72,16 @@ def visualize_clusters(df):
     plt.title('Model Clustering')
     plt.show()
 
-def visualize_clusters_with_pca(df):
+def visualize_clusters_with_pca(df, features):
     pca = PCA(n_components=2)
-    features = df[['Feature1', 'Feature2', 'Feature3']]  # Adjust accordingly
-    principal_components = pca.fit_transform(features)
+    principal_components = pca.fit_transform(df[features])
+    
+    plt.figure(figsize=(10, 8))
     plt.scatter(principal_components[:, 0], principal_components[:, 1], c=df['Cluster'])
     plt.xlabel('Principal Component 1')
     plt.ylabel('Principal Component 2')
     plt.title('Model Clusters after PCA')
+    plt.colorbar()
     plt.show()
 
 def main():
@@ -90,9 +101,14 @@ def main():
     # Perform clustering on the integrated dataset
     df_clustered, _ = cluster_models(df_with_ratings)
     
-    # Visualize the clusters, potentially using PCA for a more insightful visualization
+    # Get feature columns (assuming they are named as 'feature_1', 'feature_2', ..., 'feature_n')
+    feature_cols = [col for col in df_with_ratings.columns if col.startswith('feature')]
+    
+    # Visualize the clusters
     visualize_clusters(df_clustered)
-    visualize_clusters_with_pca(df_clustered)
+    
+    # Visualize the clusters with PCA
+    visualize_clusters_with_pca(df_clustered, feature_cols)
 
 if __name__ == "__main__":
     main()
