@@ -98,27 +98,20 @@ def main():
     # Preprocess the data to include TF-IDF features and one-hot encoded categories
     df_processed = preprocess_data(df)
     
-    # Obtain the TF-IDF feature names and one-hot encoded category names
-    tfidf_vectorizer = TfidfVectorizer(max_features=100)  # Adjust max_features as needed
-    tfidf_vectorizer.fit(df['Final Analysis Response'])
-    tfidf_feature_names = tfidf_vectorizer.get_feature_names_out()
-    
-    category_feature_names = pd.get_dummies(df['Category']).columns
-    
     # Integrate ratings with the preprocessed data using 'Model' and 'Question' as keys
     df_with_ratings = pd.merge(df_processed, pd.DataFrame(ratings_data), on=['Model', 'Question'], how='left')
     
-    # Compile a list of all feature names to be used for clustering
-    feature_cols = list(tfidf_feature_names) + list(category_feature_names)
+    # Extract numeric columns for clustering (from TF-IDF and one-hot encoding)
+    numeric_feature_cols = df_with_ratings.select_dtypes(include=['float64', 'int']).columns.tolist()
     
     # Perform clustering on the integrated dataset
-    df_clustered, kmeans = cluster_models(df_with_ratings[feature_cols])
+    df_clustered, kmeans = cluster_models(df_with_ratings[numeric_feature_cols])
     
     # Visualize the clusters
     visualize_clusters(df_clustered)
     
     # Visualize the clusters with PCA
-    visualize_clusters_with_pca(df_clustered, feature_cols)
+    visualize_clusters_with_pca(df_clustered, numeric_feature_cols)
 
 if __name__ == "__main__":
     main()
