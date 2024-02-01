@@ -16,8 +16,16 @@ def collect_ratings(questions_df):
         print(f"\nModel: {row['Model']} | Question: {row['Question']}")
         question_ratings = {'Model': row['Model'], 'Question': row['Question']}
         for i in range(1, 4):
-            rating = input(f"Rate Answer {i} (1-5): {row[f'Response{i}']} ")
-            question_ratings[f'Response{i}_Rating'] = rating
+            while True:
+                try:
+                    rating = int(input(f"Rate Answer {i} (1-5): {row[f'Response{i}']} "))
+                    if 1 <= rating <= 5:
+                        question_ratings[f'Response{i}_Rating'] = rating
+                        break
+                    else:
+                        print("Invalid input. Please enter a number between 1 and 5.")
+                except ValueError:
+                    print("Invalid input. Please enter an integer.")
         ratings_data.append(question_ratings)
     return ratings_data
 
@@ -84,32 +92,33 @@ def main():
     # Collect ratings directly related to the data loaded
     ratings_data = collect_ratings(df)
     
-    # Convert ratings_data to DataFrame and add 'Model' and 'Question' as keys for merging
-    ratings_df = pd.DataFrame(ratings_data)
-    ratings_df['Model'] = df['Model']
-    ratings_df['Question'] = df['Question']
-    
     # Save the ratings DataFrame to an Excel file
-    save_ratings(ratings_df, 'files/ratings.xlsx')
+    save_ratings(pd.DataFrame(ratings_data), 'files/ratings.xlsx')
 
     # Preprocess the data to include TF-IDF features and one-hot encoded categories
     df_processed = preprocess_data(df)
     
+    # Obtain the TF-IDF feature names and one-hot encoded category names
+    tfidf_vectorizer = TfidfVectorizer(max_features=100)  # Adjust max_features as needed
+    tfidf_vectorizer.fit(df['Final Analysis Response'])
+    tfidf_feature_names = tfidf_vectorizer.get_feature_names_out()
+    
+    category_feature_names = pd.get_dummies(df['Category']).columns
+    
     # Integrate ratings with the preprocessed data using 'Model' and 'Question' as keys
-    # Note: It is assumed that 'Model' and 'Question' can be used to uniquely identify each entry
-    df_with_ratings = pd.merge(df_processed, ratings_df, on=['Model', 'Question'], how='left')
+    df_with_ratings = pd.merge(df_processed, pd.DataFrame(ratings_data), on=['Model', 'Question'], how='left')
+    
+    # Compile a list of all feature names to be used for clustering
+    feature_cols = list(tfidf_feature_names) + list(category_feature_names)
     
     # Perform clustering on the integrated dataset
-    # Exclude non-numeric columns before clustering
-    numeric_cols = df_with_ratings.select_dtypes(include=[ 'float64', 'int64']).columns
-    df_clustered, kmeans = cluster_models(df_with_ratings[numeric_cols])
+    df_clustered, kmeans = cluster_models(df_with_ratings[feature_cols])
     
     # Visualize the clusters
     visualize_clusters(df_clustered)
     
     # Visualize the clusters with PCA
-    # Use the numeric columns for PCA
-    visualize_clusters_with_pca(df_clustered, numeric_cols)
+    visualize_clusters_with_pca(df_clustered, feature_cols)
 
 if __name__ == "__main__":
     main()
