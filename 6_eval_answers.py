@@ -88,27 +88,32 @@ def main():
     # Load and preprocess the data
     file_path = config.combined_file_path
     df = read_data(file_path)
-    df_processed = preprocess_data(df)
     
     # Collect ratings directly related to the data loaded
+    # Note: This will require manual input for each row in your dataframe
     ratings_data = collect_ratings(df)
     save_ratings(ratings_data, 'files/ratings.xlsx')
+
+    # Preprocess the data after collecting ratings
+    df_processed = preprocess_data(df)
     
+    # Convert ratings_data to a DataFrame if it isn't already one
+    ratings_df = pd.DataFrame(ratings_data)
+
     # Integrate ratings with your data
-    # Ensure ratings_data is in a format that matches the df_processed for a successful merge
-    df_with_ratings = integrate_ratings_with_data(df_processed, pd.DataFrame(ratings_data))
+    # Ensure ratings_data is in a DataFrame with a structure that can be directly merged with df_processed
+    df_with_ratings = integrate_ratings_with_data(df_processed, ratings_df)
     
     # Perform clustering on the integrated dataset
-    df_clustered, _ = cluster_models(df_with_ratings)
-    
-    # Get feature columns (assuming they are named as 'feature_1', 'feature_2', ..., 'feature_n')
-    feature_cols = [col for col in df_with_ratings.columns if col.startswith('feature')]
+    df_clustered, kmeans = cluster_models(df_with_ratings)
     
     # Visualize the clusters
     visualize_clusters(df_clustered)
     
     # Visualize the clusters with PCA
-    visualize_clusters_with_pca(df_clustered, feature_cols)
+    # Extract the features used for clustering (TF-IDF features)
+    tfidf_feature_cols = [col for col in df_with_ratings.columns if col.startswith('feature_')]
+    visualize_clusters_with_pca(df_clustered, tfidf_feature_cols)
 
 if __name__ == "__main__":
     main()
