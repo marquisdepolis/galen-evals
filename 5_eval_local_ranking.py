@@ -101,7 +101,8 @@ def write_data():
     for item in json_strings:
         response_obj = item["response"]  # Directly use the response object
         for model in response_obj["Model"]:
-            unique_models.add(model['Name'])
+            normalized_name = model['Name'].lower().strip()
+            unique_models.add(normalized_name)
 
     # Convert the set to a list and sort it
     unique_models = sorted(list(unique_models))
@@ -111,7 +112,9 @@ def write_data():
         row = {model: '' for model in unique_models}  # Initialize all model rankings as empty
         row['ID'] = item['index']  # Use the index from the original data
         for model in item["response"]["Model"]:
-            row[model['Name']] = model.get('Ranking', '')
+            # Normalize model name for consistency in dictionary keys
+            normalized_name = model['Name'].lower().strip()
+            row[normalized_name] = model.get('Ranking', '')
         data.append(row)
 
     # Create DataFrame and write to Excel
