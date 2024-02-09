@@ -3,16 +3,19 @@ import pandas as pd
 import json
 import requests
 from pydantic import BaseModel, ValidationError, conint
-import config
 import importlib
+import config
 importlib.reload(config)
 from config import config, reset_config
 from dotenv import load_dotenv
 load_dotenv()
-import subprocess
+reset_config()
+# import os
+# import subprocess
 
-shell_script = 'ollama_script.sh'
-result = subprocess.run([shell_script], shell=True, check=True)
+# current_directory = os.getcwd()
+# shell_script = os.path.join(current_directory, 'ollama_script.sh')
+# result = subprocess.run(['bash', shell_script], check=True)
 
 INSTRUCTION = config.INSTRUCTION
 F_NAME = config.F_NAME
@@ -23,6 +26,10 @@ class ModelRanking(BaseModel):
 
 class ResponseModel(BaseModel):
     Model: list[ModelRanking]
+
+class Ranking(BaseModel):
+    name: str
+    ranking: int
 
 template = {
  "Model": [
@@ -71,7 +78,9 @@ def make_json(data):
                 "format": "json",
                 "stream": False,
                 "options": {"temperature": 0.1, "top_p": 0.99, "top_k": 100},
+                # response_model=Ranking
             }
+            print(f"response data is: {response_data}")
             response = generate_text(response_data)
             valid_response = validate_response(response)
             attempts += 1
@@ -82,14 +91,6 @@ def make_json(data):
             response = ''.join([str(item) for item in response])
             response_full.append({"index": index, "response": {"Model": []}})
     return response_full
-
-def main():
-    filepath = config.llmeval_results
-    column = 'Evaluation of responses from GPT-4'
-    dataframe = read_excel(filepath, column)
-    json_output = make_json(dataframe)
-    with open("output.json", "w") as f:
-        json.dump(json_output, f)
 
 # Read the JSON file
 def write_data():
@@ -120,7 +121,17 @@ def write_data():
 
     print(f"Data written to {excel_file}")
 
+def main():
+    filepath = config.get_file_path('llmeval_results')
+    print(f"filepath is: {filepath}")
+    column = 'Evaluation of responses from GPT-4'
+    dataframe = read_excel(filepath, column)
+    json_output = make_json(dataframe)
+    with open("output.json", "w") as f:
+        json.dump(json_output, f)
+
 if __name__ == "__main__":
+    # config.set_mode("default")
     main()
     write_data()
 

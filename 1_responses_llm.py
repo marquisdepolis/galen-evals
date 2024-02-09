@@ -10,6 +10,8 @@ folder_path = 'files'
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
+config.set_mode('default')
+
 # # Load the file
 df = pd.read_excel(config.questions)
 # Save the original DataFrame

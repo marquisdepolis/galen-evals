@@ -4,6 +4,8 @@ from difflib import SequenceMatcher
 import json
 from config import config
 
+config.set_mode('default')
+
 def clean_text(text):
     """
     Remove non-ASCII characters from the text.
