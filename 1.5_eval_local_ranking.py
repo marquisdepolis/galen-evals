@@ -94,7 +94,7 @@ def make_json(data):
 
 # Read the JSON file
 def write_data():
-    with open("output.json", "r") as f:
+    with open("files/output.json", "r") as f:
         json_strings = json.load(f)
 
     unique_models = set()
@@ -130,7 +130,7 @@ def main():
     column = 'Evaluation of responses from GPT-4'
     dataframe = read_excel(filepath, column)
     json_output = make_json(dataframe)
-    with open("output.json", "w") as f:
+    with open("files/output.json", "w") as f:
         json.dump(json_output, f)
 
 if __name__ == "__main__":
