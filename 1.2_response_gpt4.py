@@ -58,7 +58,7 @@ def wait_on_run_and_get_response(run, thread):
 def create_output_csv(data, responses, model_name, interim_csv_path):
     new_rows = []
     for question, response in zip(data['Question'], responses):
-        new_rows.append({'Model': model_name, 'Question': question, 'Response': response})
+        new_rows.append({'Model': model_name, 'Question': question, 'Response': response, 'Latency': latency})
     new_data = pd.DataFrame(new_rows)
     new_data.to_excel(interim_csv_path, index=False)
 
@@ -67,9 +67,15 @@ prompts = process_data_for_gpt(data)
 ASSISTANT_ID = assistant.id
 
 responses = []
+latencies = []  # Initialize a list to store latencies
+
 for prompt in prompts:
+    start_time = time.time()  # Capture start time
     run, thread = submit_message_and_create_run(ASSISTANT_ID, prompt)
     response = wait_on_run_and_get_response(run, thread)
+    end_time = time.time()  # Capture end time
+    latency = end_time - start_time  # Calculate latency
+    latencies.append(latency)  # Store latency
     if isinstance(response, list):
         response = ' '.join(map(str, response))
     response = response.replace("\\\\n", "\\n")
@@ -77,8 +83,7 @@ for prompt in prompts:
     print(response)
     responses.append(response)
 
-
-create_output_csv(data, responses, GPT_MODEL, OUTPUT_CSV_PATH)
+create_output_csv(data, responses, latencies, GPT_MODEL, OUTPUT_CSV_PATH)
 
 
 

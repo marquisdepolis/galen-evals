@@ -2,6 +2,7 @@
 import replicate
 import pandas as pd
 import json
+import time
 import os
 from config import config
 from dotenv import load_dotenv
@@ -34,7 +35,7 @@ else:
     print("No duplicates found.")
 
 # DataFrame to store the results
-results_df = pd.DataFrame(columns=['Model', 'Question', 'Response'])
+results_df = pd.DataFrame(columns=['Model', 'Question', 'Response', 'Latency'])
 
 models = {
     # "qwen-14b": "nomagick/qwen-14b-chat:f9e1ed25e2073f72ff9a3f46545d909b1078e674da543e791dec79218072ae70",
@@ -77,6 +78,8 @@ for model_key, model_value in models.items():
         else:
             prompt = f"You are a helpful assistant. {config.INSTRUCTION}. {question}"
 
+        start_time = time.time()  # Record the start time
+
         try:
             print(f"{model_key}: {prompt}")
             output = replicate.run(
@@ -103,7 +106,10 @@ for model_key, model_value in models.items():
         except Exception as e:
             response = f"Error: {e}"
 
-        new_row = pd.DataFrame({'Model': [model_key], 'Question': [qn], 'Response': [response]})
+        end_time = time.time()  # Record the end time
+        latency = end_time - start_time  # Calculate latency
+
+        new_row = pd.DataFrame({'Model': [model_key], 'Question': [qn], 'Response': [response], 'Latency': [latency]})
         results_df = pd.concat([results_df, new_row], ignore_index=True)
 
         if index % 20 == 0:  # Save every 10 questions, adjust as needed

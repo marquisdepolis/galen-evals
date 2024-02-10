@@ -30,3 +30,4 @@ There's plenty to do, since it's a simple implementation, but in no order:
 5. Create a "Best Answer" for the questions in case we want to measure the answers against that - (can also use this to DPO the models later as needed)
 6. Create a way to perturb the questions to see how well the LLMs react to new info coming in [Done]
 7. Create a way to provide a "knowledgebase" to see how good the LLMs are at asking for help from the right quarters [Done]
+8. Add answer clusters and plotting w.r.t categories to the automated model ranking file
