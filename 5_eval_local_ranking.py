@@ -134,8 +134,6 @@ def main():
         json.dump(json_output, f)
 
 if __name__ == "__main__":
-    # config.set_mode("default")
+    config.set_mode("default")
     main()
     write_data()
-
-
