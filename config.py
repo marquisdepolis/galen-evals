@@ -24,6 +24,16 @@ class Config:
                 'llmeval_results': 'files/{F_NAME}_llmeval_results.xlsx',
                 'model_rankings': 'files/{F_NAME}_model_rankings.xlsx',
             },
+            'rag': {
+                'questions': 'files/questions_rag.xlsx',
+                'q_original': 'files/questions_original_rag.xlsx',
+                'llmresults_file_path': 'files/{F_NAME}_results_grouped_by_model_rag.xlsx',
+                'gpt4results_csv_path': 'files/{F_NAME}_results_gpt4_rag.xlsx',
+                'results_file_path': 'files/{F_NAME}_allresults_grouped_by_model_rag.xlsx',
+                'combined_file_path': 'files/{F_NAME}_results_grouped_by_question_rag.xlsx',
+                'llmeval_results': 'files/{F_NAME}_llmeval_results_rag.xlsx',
+                'model_rankings': 'files/{F_NAME}_model_rankings_rag.xlsx',
+            },
             'dbs': {
                 'questions': 'files/questions_db.xlsx',
                 'q_original': 'files/questions_original_db.xlsx',
