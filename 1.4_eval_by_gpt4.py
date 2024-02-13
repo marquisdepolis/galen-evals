@@ -12,12 +12,9 @@ load_dotenv()
 
 client = OpenAI()
 
-with open('config.json', 'r') as config_file:
-    config = json.load(config_file)
-
-INSTRUCTION = config['instructions']
-F_NAME = config["name"]
-GPT_MODEL = config["GPT_MODEL"]
+INSTRUCTION = config.INSTRUCTION
+F_NAME = config.F_NAME
+GPT_MODEL = config.GPT_MODEL
 
 def show_json(obj):
     print(json.loads(obj.model_dump_json()))
@@ -44,6 +41,7 @@ template = {
   {"Name": "deepseek_33bq", "Ranking": ""}
  ]
 }
+
 def process_data_for_function(data):
     prompts = []
     for _, row in data.iterrows():
