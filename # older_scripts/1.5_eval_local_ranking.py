@@ -1,3 +1,4 @@
+## Script for local ranking, now no longer needed.
 # Start ollama according to the script if you need to 
 import pandas as pd
 import json
