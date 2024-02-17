@@ -13,7 +13,7 @@ from config import config
 config.set_mode("default")
 F_NAME = config.F_NAME
 
-marvin.settings.openai.chat.completions.model = 'gpt-4'
+marvin.settings.openai.chat.completions.model = 'gpt-4-turbo-preview'
 
 class Answer(BaseModel):
     index: int = Field(..., description='Index of the answer')
@@ -37,15 +37,17 @@ def concatenate_question_model_response(row, df):
 
 def process_data(data):
     results = []
+    reasons = []
     n=3
     additional_columns = ['Category', 'Type']  # Add any other additional columns here
     for _, row in data.iterrows():
+        question = []
         question = concatenate_question_model_response(row, data)
         models = [col for col in data.columns if col not in ['Question'] + additional_columns]
         answers = [row[model] for model in models if pd.notna(row[model])]
         answer_objects = [Answer(index=i, answer=str(a)) for i, a in enumerate(answers)]
         result = rank_answers(question, answer_objects)
-        result_dict = {'Question': question}
+        result_dict = {'Question': question, 'Reasoning': result.reasoning}
         for col in additional_columns:
             if col in row:
                 result_dict[col] = row[col]
