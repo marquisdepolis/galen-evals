@@ -20,12 +20,12 @@ class Answer(BaseModel):
     answer: str = Field(..., description='The answer')
 
 class RankingResults(BaseModel):
-    reasoning: str = Field(..., description='Give some thoughts on the quality of the answers')
+    reasoning: str = Field(..., description='Give some thoughts on the quality of the response from the LLM and its level of adaptability with respect to changes in circumstances and given knowledgebase')
     rating: List[int] = Field(..., description='The ranked answer indexes')
 
 @ai_fn
 def rank_answers(question: str, answers: List[Answer]) -> RankingResults:
-    '''Rate from 1 to 5 how well the later Responses take into account the perturbations and knowledgebase.'''
+    '''Analyse how well the Perturbed Response and Final Analysis Response take into account the perturbations and knowledgebase, and give a rating from 1 to 5.'''
 
 def read_excel(file_path):
     return pd.read_excel(file_path)
@@ -41,7 +41,7 @@ def process_data(data):
     n=6
     i = 0
     additional_columns = ['Category', 'Type', 'Model']
-    for _, row in data.head(n).iterrows():
+    for _, row in data.iterrows():
         question = []
         i = i+1
         question = concatenate_question_model_response(row, data)
