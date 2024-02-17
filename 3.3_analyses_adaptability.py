@@ -45,11 +45,9 @@ sns.heatmap(heatmap_data_normalized, annot=True, cmap='coolwarm', fmt=".2f")
 plt.title('Normalized Average Ranking and Rating Heatmap', fontsize=16)
 plt.ylabel('Model')
 plt.savefig(f'charts/{F_NAME}_rankvsrate_heatmap.png')
-# plt.show()
 
 # Generating a CDF plot for model ratings to assess adaptability
 plt.figure(figsize=(12, 8))
-
 unique_models = refined_merge_df['Model'].unique()
 for model in unique_models:
     # Selecting ratings for the current model
@@ -69,4 +67,14 @@ plt.grid(True)
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.figtext(0.5, 0.01, 'Models that reach higher CDF values at lower ratings are generally more adaptable, as a larger proportion of their responses are rated highly.', fontsize=10, ha='center')
 plt.savefig(f'charts/{F_NAME}_rankvsrate_CDF.png')
-# plt.show()
+
+# Assuming df is your DataFrame and it contains 'Rating_Single' and 'Ranking' columns
+sns.jointplot(x='Rating_Single', y='Ranking', data=refined_merge_df, kind='reg', height=10)
+plt.suptitle('Jointplot of Adaptability Rating vs. Ranking', fontsize=14, y=1.0)
+plt.xlabel('Adaptability Rating', fontsize=11)
+plt.ylabel('Ranking', fontsize=11)
+correlation = refined_merge_df['Rating_Single'].corr(refined_merge_df['Ranking'])
+subtitle = (f"Correlation coefficient between Adaptability Rating and Ranking: {correlation:.2f}")
+plt.figtext(0.5, 0.01, subtitle, fontsize=9, ha='center')
+plt.savefig(f'charts/{F_NAME}_ratevsrank_jointplot.png')
+
