@@ -64,5 +64,5 @@ for result in ranking_results:
 
 ranking_df = pd.DataFrame(ranking_results)
 print(ranking_df)
-# ranking_df.to_excel(output_file_path, index=False)
+ranking_df.to_excel(output_file_path, index=False)
 print(f"Ranking results saved to {output_file_path}")
