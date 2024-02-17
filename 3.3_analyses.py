@@ -3,6 +3,9 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from scipy.cluster.hierarchy import dendrogram, linkage
 import seaborn as sns
 from config import config
 from dotenv import load_dotenv
@@ -54,7 +57,7 @@ plt.xlabel('Model')
 plt.legend(title='Type', bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
 plt.savefig(f'charts/{F_NAME}_mean_latency_by_model_and_type.png')  # Save plot
-plt.show()
+# plt.show()
 
 # Plotting Mean Ranking by Model and Type
 plt.figure(figsize=(14, 7))
@@ -66,7 +69,7 @@ plt.xlabel('Model')
 plt.legend(title='Type', bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
 plt.savefig(f'charts/{F_NAME}_mean_ranking_by_model_and_type.png')  # Save plot
-plt.show()
+# plt.show()
 
 # Category Performance Analysis
 category_performance = data.groupby(['Category_x']).agg({'Latency': 'mean', 'Ranking': 'mean'}).sort_values(by='Ranking', ascending=True)
@@ -79,7 +82,7 @@ plt.xlabel('Average Ranking')
 plt.ylabel('Category')
 plt.tight_layout()
 plt.savefig(f'charts/{F_NAME}_average_ranking_by_category.png')  # Save plot
-plt.show()
+# plt.show()
 
 # Latency Distribution Across Models
 plt.figure(figsize=(14, 7))
@@ -90,7 +93,7 @@ plt.ylabel('Latency (Seconds)')
 plt.xlabel('Model')
 plt.tight_layout()
 plt.savefig(f'charts/{F_NAME}_latency_distribution_across_models.png')  # Save plot
-plt.show()
+# plt.show()
 
 # Create a scatter plot
 plt.figure(figsize=(14, 7))
@@ -100,7 +103,7 @@ plt.xlabel('Latency (in seconds)')
 plt.ylabel('Ranking')
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 plt.savefig(f'charts/{F_NAME}_latency_vs_ranking_across_models.png')
-plt.show()
+# plt.show()
 
 # Correlation analysis between latency and ranking
 correlation_analysis = data[['Latency', 'Ranking']].corr()
@@ -112,3 +115,27 @@ cosine_similarities = cosine_similarity(tfidf_matrix)
 
 # Average Cosine Similarity across all responses
 average_cosine_similarity = np.mean(cosine_similarities)
+
+# Assuming correlation_analysis is a Pandas DataFrame with the correlation values
+sns.heatmap(correlation_analysis, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Heatmap of Correlation between Latency and Ranking')
+plt.savefig(f'charts/{F_NAME}_latency_ranking_corr_heatmap.png')
+# plt.show()
+
+# Assuming cosine_similarities is a square matrix
+sns.heatmap(cosine_similarities, cmap='YlGnBu')
+plt.title('Heatmap of Cosine Similarities among Responses')
+plt.savefig(f'charts/{F_NAME}_cosine_similarities_heatmap.png')
+# plt.show()
+
+# Generate the linkage matrix
+Z = linkage(cosine_similarities, 'ward')
+
+# Plot the dendrogram
+plt.figure(figsize=(10, 5))
+dendrogram(Z)
+plt.title('Dendrogram for Hierarchical Clustering of Responses')
+plt.xlabel('Response Index')
+plt.ylabel('Distance')
+plt.savefig(f'charts/{F_NAME}_dendrogram_clustering.png')
+# plt.show()
