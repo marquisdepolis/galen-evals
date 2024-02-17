@@ -26,8 +26,8 @@ class RankingResults(BaseModel):
 @marvin.ai_fn
 def rate_responses(question: str, answers: List[Answer]) -> RankingResults:
     """
-    Analyse how well the Perturbed Response and Final Analysis Response take into account the perturbations and knowledgebase, and give one single rating from 1 to 5. 1 is the lowest and 5 is the highest. 
-    For instance, if the resonse is "I am a language model and I don't know" that is very bad."
+    Analyse how well the Perturbed Response and Final Analysis Response take into account the perturbations and knowledgebase, and give ratings from 1 to 5 for Perturbation Response and Final Analysis Response. 1 is the lowest and 5 is the highest.
+    For instance, if the Final Question Response is empty, or has "I am a language model and I don't know" that is very bad."
     If the subsequent answers take new information into account and apply them appropriately, then it's very good.
     """
 
@@ -37,20 +37,16 @@ def read_excel(file_path):
 def concatenate_question_model_response(row, df):
     question_part = f"Question: {row['Final Analysis Question']} | "
     model_response_part = f"Question: {row['Final Analysis Response']} | "
-    # model_response_part = ' | '.join([f"{col}: {row[col]}" for col in df.columns[7:]])
     return question_part + model_response_part
 
 def process_data(data):
     results = []
-    reasons = []
     n=10
     additional_columns = ['Category', 'Type', 'Model']
     for _, row in data.iterrows():
         qn_resp = []
         qn_resp = concatenate_question_model_response(row, data)
         print(f"The questions re: \n{qn_resp}\n")
-        # models = [col for col in data.columns if col not in ['Question'] + additional_columns]
-        # answers = [row[model] for model in models if pd.notna(row[model])]
         answer_objects = [Answer(answer = qn_resp)]
         result = rate_responses(qn_resp, answer_objects)
         result_dict = {'Final Analysis Question': qn_resp, 'Reasoning': result.reasoning, 'Rating': result.rating}
@@ -81,6 +77,6 @@ def clean_and_average_rating(rating):
         average = None
     return average
 
-ranking_df['Rating'] = ranking_df['Rating'].apply(clean_and_average_rating)
+ranking_df['Rating_Single'] = ranking_df['Rating'].apply(clean_and_average_rating)
 ranking_df.to_excel(output_file_path, index=False)
 print(f"Ranking results saved to {output_file_path}")
