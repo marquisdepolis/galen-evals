@@ -18,9 +18,13 @@ A coworker for life sciences
 
 # Charts!
 ![Latency vs Ranking across models](image.png)
-Notice the cold start problem occasionally, but also the performance from Yi is wow!
+Yi-34b seems remarkably good!
 
+![Mean Rankings by Model](image-1.png)
+Interesting: the performance from Yi is wow!
 
+![Latency](image-2.png)
+GPT is the one that's solved cold start problem the best
 
 # Files
 The crucial ones are:
