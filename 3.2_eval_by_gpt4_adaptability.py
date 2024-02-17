@@ -32,7 +32,8 @@ def read_excel(file_path):
 
 def concatenate_question_model_response(row, df):
     question_part = f"Question: {row['Final Analysis Question']} | "
-    model_response_part = ' | '.join([f"{col}: {row[col]}" for col in df.columns[7:]])
+    model_response_part = f"Question: {row['Final Analysis Response']} | "
+    # model_response_part = ' | '.join([f"{col}: {row[col]}" for col in df.columns[7:]])
     return question_part + model_response_part
 
 def process_data(data):
@@ -68,18 +69,14 @@ print(ranking_df['Rating'])
 
 def clean_and_average_rating(rating):
     if isinstance(rating, str):
-        # If the rating is a string, strip brackets, split by comma, convert to float, and calculate average
         ratings = rating.strip('[]').split(',')
         average = sum([float(r) for r in ratings]) / len(ratings)
     elif isinstance(rating, list):
-        # If the rating is already a list, convert each element to float and calculate average
         average = sum([float(r) for r in rating]) / len(rating)
     else:
-        # Handle unexpected data types, possibly set a default value or raise an error
-        average = None  # or raise ValueError("Unsupported data type")
+        average = None
     return average
 
 ranking_df['Rating'] = ranking_df['Rating'].apply(clean_and_average_rating)
-
 ranking_df.to_excel(output_file_path, index=False)
 print(f"Ranking results saved to {output_file_path}")
