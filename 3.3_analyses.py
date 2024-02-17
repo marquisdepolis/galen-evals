@@ -91,3 +91,24 @@ plt.xlabel('Model')
 plt.tight_layout()
 plt.savefig(f'charts/{F_NAME}_latency_distribution_across_models.png')  # Save plot
 plt.show()
+
+# Create a scatter plot
+plt.figure(figsize=(14, 7))
+scatter = sns.scatterplot(data=data, x='Latency', y='Ranking', hue='Model', style='Model', s=100)
+plt.title('Latency vs. Ranking Across Models')
+plt.xlabel('Latency (in seconds)')
+plt.ylabel('Ranking')
+plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+plt.savefig(f'charts/{F_NAME}_latency_vs_ranking_across_models.png')
+plt.show()
+
+# Correlation analysis between latency and ranking
+correlation_analysis = data[['Latency', 'Ranking']].corr()
+
+# Textual analysis of Reasoning using TF-IDF and Cosine Similarity
+tfidf_vectorizer = TfidfVectorizer()
+tfidf_matrix = tfidf_vectorizer.fit_transform(data['Reasoning'])
+cosine_similarities = cosine_similarity(tfidf_matrix)
+
+# Average Cosine Similarity across all responses
+average_cosine_similarity = np.mean(cosine_similarities)

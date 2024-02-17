@@ -17,16 +17,16 @@ A coworker for life sciences
 6. Run human eval if you can
 
 # Charts!
-![Latency vs Ranking across models](image.png)
+![Latency vs Ranking across models](charts/galen_latency_vs_ranking_across_models.png)
 Yi-34b seems remarkably good, slightly lower latency but higher rankings. Think there's a cold start data problem though with Replicate.
 
-![Mean Rankings by Model](image-1.png)
+![Mean Rankings by Model](charts/galen_mean_ranking_by_model_and_type.png)
 Interesting: the performance from Yi is wow!
 
-![Mean latency by model and type](image-3.png)
+![Mean latency by model and type](charts/galen_mean_latency_by_model_and_type.png)
 Mixtral is really slow with DB, and GPT stays winning in terms of speed. Yi's the same throughout it seems
 
-![Latency](image-2.png)
+![Latency](charts/galen_latency_distribution_across_models.png)
 GPT is the one that's solved cold start problem the best
 
 # Files
