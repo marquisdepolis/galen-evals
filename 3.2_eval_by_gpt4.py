@@ -30,12 +30,17 @@ def rank_answers(question: str, answers: List[Answer]) -> RankingResults:
 def read_excel(file_path):
     return pd.read_excel(file_path)
 
+def concatenate_question_model_response(row, df):
+    question_part = f"Question: {row['Question']} | "
+    model_response_part = ' | '.join([f"{col}: {row[col]}" for col in df.columns[2:]])
+    return question_part + model_response_part
+
 def process_data(data):
     results = []
     n=3
     additional_columns = ['Category', 'Type']  # Add any other additional columns here
     for _, row in data.head(n).iterrows():
-        question = row['Question']
+        question = concatenate_question_model_response(row, data)
         models = [col for col in data.columns if col not in ['Question'] + additional_columns]
         answers = [row[model] for model in models if pd.notna(row[model])]
         answer_objects = [Answer(index=i, answer=str(a)) for i, a in enumerate(answers)]
