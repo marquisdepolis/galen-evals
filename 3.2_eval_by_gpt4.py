@@ -44,7 +44,6 @@ def process_data(data):
         for col in additional_columns:
             if col in row:
                 result_dict[col] = row[col]
-
         for idx, rank in enumerate(result.ranked_answers):
             result_dict[models[idx]] = rank + 1  # +1 to start ranking from 1 instead of 0
         results.append(result_dict)
@@ -59,5 +58,6 @@ for result in ranking_results:
     print(result)
 
 ranking_df = pd.DataFrame(ranking_results)
-ranking_df.to_excel(output_file_path, index=False)
+print(ranking_df)
+# ranking_df.to_excel(output_file_path, index=False)
 print(f"Ranking results saved to {output_file_path}")
