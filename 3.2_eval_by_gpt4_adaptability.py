@@ -67,9 +67,16 @@ ranking_df = pd.DataFrame(ranking_results)
 print(ranking_df['Rating'])
 
 def clean_and_average_rating(rating):
-    # Remove square brackets, split by comma, convert to float, and calculate average
-    ratings = rating.strip('[]').split(',')
-    average = sum([float(r) for r in ratings]) / len(ratings)
+    if isinstance(rating, str):
+        # If the rating is a string, strip brackets, split by comma, convert to float, and calculate average
+        ratings = rating.strip('[]').split(',')
+        average = sum([float(r) for r in ratings]) / len(ratings)
+    elif isinstance(rating, list):
+        # If the rating is already a list, convert each element to float and calculate average
+        average = sum([float(r) for r in rating]) / len(rating)
+    else:
+        # Handle unexpected data types, possibly set a default value or raise an error
+        average = None  # or raise ValueError("Unsupported data type")
     return average
 
 ranking_df['Rating'] = ranking_df['Rating'].apply(clean_and_average_rating)
