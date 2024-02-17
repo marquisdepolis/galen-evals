@@ -25,7 +25,11 @@ class RankingResults(BaseModel):
 
 @marvin.ai_fn
 def rate_responses(question: str, answers: List[Answer]) -> RankingResults:
-    """Analyse how well the Perturbed Response and Final Analysis Response take into account the perturbations and knowledgebase, and give one single rating from 1 to 5. 1 is the lowest and 5 is the highest."""
+    """
+    Analyse how well the Perturbed Response and Final Analysis Response take into account the perturbations and knowledgebase, and give one single rating from 1 to 5. 1 is the lowest and 5 is the highest. 
+    For instance, if the resonse is "I am a language model and I don't know" that is very bad."
+    If the subsequent answers take new information into account and apply them appropriately, then it's very good.
+    """
 
 def read_excel(file_path):
     return pd.read_excel(file_path)
@@ -41,7 +45,7 @@ def process_data(data):
     reasons = []
     n=10
     additional_columns = ['Category', 'Type', 'Model']
-    for _, row in data.head(n).iterrows():
+    for _, row in data.iterrows():
         qn_resp = []
         qn_resp = concatenate_question_model_response(row, data)
         print(f"The questions re: \n{qn_resp}\n")
