@@ -1,9 +1,14 @@
 # Updated code for evaluation
 import pandas as pd
 import marvin
+import os
 from marvin import ai_model, ai_fn
 from pydantic import BaseModel, Field
 from typing import List
+from openai import OpenAI
+from dotenv import load_dotenv
+load_dotenv()
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 from config import config
 config.set_mode("default")
 F_NAME = config.F_NAME
@@ -33,7 +38,7 @@ def process_data(data):
         question = row['Question']
         models = [col for col in data.columns if col not in ['Question'] + additional_columns]
         answers = [row[model] for model in models if pd.notna(row[model])]
-        answer_objects = [Answer(index=i, answer=a) for i, a in enumerate(answers)]
+        answer_objects = [Answer(index=i, answer=str(a)) for i, a in enumerate(answers)]
         result = rank_answers(question, answer_objects)
         result_dict = {'Question': question}
         for col in additional_columns:
