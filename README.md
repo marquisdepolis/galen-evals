@@ -1,5 +1,6 @@
 # galen-evals
-Evals for Drug Discovery
+A coworker for life sciences
+- one who also shows you their work and tells you what to choose!
 
 # What you need to run this
 1. OpenAI API key
