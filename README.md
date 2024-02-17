@@ -18,13 +18,13 @@ A coworker for life sciences
 
 # Charts!
 ![Latency vs Ranking across models](image.png)
-Yi-34b seems remarkably good!
+Yi-34b seems remarkably good, slightly lower latency but higher rankings. Think there's a cold start data problem though with Replicate.
 
 ![Mean Rankings by Model](image-1.png)
 Interesting: the performance from Yi is wow!
 
-![Mean latency by model](image-3.png)
-Once again, Yi wins here ... 
+![Mean latency by model and type](image-3.png)
+Mixtral is really slow with DB, and GPT stays winning in terms of speed. Yi's the same throughout it seems
 
 ![Latency](image-2.png)
 GPT is the one that's solved cold start problem the best
