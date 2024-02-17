@@ -1,6 +1,9 @@
 # Create a master file to do analyses
 import os
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 from config import config
 from dotenv import load_dotenv
 load_dotenv()
@@ -30,3 +33,61 @@ model_rankings_long_df['Model'] = model_rankings_long_df['Model'].str.lower().re
 combined_data = pd.merge(allresults_combined_df, model_rankings_long_df, on=['Question', 'Model'], how='inner')
 
 combined_data.to_excel(analysis_df_path, index=False)
+
+# Now, onwards to analysis and charts
+data = pd.read_excel(analysis_df_path)
+
+# Basic statistical analysis on latency and ranking by Model
+latency_stats = data.groupby('Model')['Latency'].describe()
+ranking_stats = data.groupby('Model')['Ranking'].describe()
+
+# Analysis by Type
+type_analysis = data.groupby(['Type', 'Model']).agg({'Latency': 'mean', 'Ranking': 'mean'}).reset_index()
+
+# Plotting Mean Latency by Model and Type
+plt.figure(figsize=(14, 7))
+sns.barplot(x='Model', y='Latency', hue='Type', data=type_analysis)
+plt.title('Mean Latency by Model and Type')
+plt.xticks(rotation=45)
+plt.ylabel('Mean Latency (Seconds)')
+plt.xlabel('Model')
+plt.legend(title='Type', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
+plt.savefig(f'charts/{F_NAME}_mean_latency_by_model_and_type.png')  # Save plot
+plt.show()
+
+# Plotting Mean Ranking by Model and Type
+plt.figure(figsize=(14, 7))
+sns.barplot(x='Model', y='Ranking', hue='Type', data=type_analysis)
+plt.title('Mean Ranking by Model and Type')
+plt.xticks(rotation=45)
+plt.ylabel('Mean Ranking')
+plt.xlabel('Model')
+plt.legend(title='Type', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
+plt.savefig(f'charts/{F_NAME}_mean_ranking_by_model_and_type.png')  # Save plot
+plt.show()
+
+# Category Performance Analysis
+category_performance = data.groupby(['Category_x']).agg({'Latency': 'mean', 'Ranking': 'mean'}).sort_values(by='Ranking', ascending=True)
+
+# Plotting Category Performance
+plt.figure(figsize=(14, 7))
+category_performance['Ranking'].plot(kind='barh', color='skyblue')
+plt.title('Average Ranking by Category')
+plt.xlabel('Average Ranking')
+plt.ylabel('Category')
+plt.tight_layout()
+plt.savefig(f'charts/{F_NAME}_average_ranking_by_category.png')  # Save plot
+plt.show()
+
+# Latency Distribution Across Models
+plt.figure(figsize=(14, 7))
+sns.boxplot(x='Model', y='Latency', data=data)
+plt.title('Latency Distribution Across Models')
+plt.xticks(rotation=45)
+plt.ylabel('Latency (Seconds)')
+plt.xlabel('Model')
+plt.tight_layout()
+plt.savefig(f'charts/{F_NAME}_latency_distribution_across_models.png')  # Save plot
+plt.show()

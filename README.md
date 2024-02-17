@@ -23,6 +23,9 @@ Yi-34b seems remarkably good!
 ![Mean Rankings by Model](image-1.png)
 Interesting: the performance from Yi is wow!
 
+![Mean latency by model](image-3.png)
+Once again, Yi wins here ... 
+
 ![Latency](image-2.png)
 GPT is the one that's solved cold start problem the best
 
