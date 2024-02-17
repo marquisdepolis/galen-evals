@@ -42,7 +42,7 @@ def concatenate_question_model_response(row, df):
 def process_data(data):
     results = []
     n=10
-    additional_columns = ['Category', 'Type', 'Model']
+    additional_columns = ['Category', 'Type', 'Model', 'Question', 'Latency']
     for _, row in data.iterrows():
         qn_resp = []
         qn_resp = concatenate_question_model_response(row, data)
