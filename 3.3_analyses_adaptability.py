@@ -1,5 +1,11 @@
 # Update adaptability excel and run analyses
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from scipy.cluster.hierarchy import dendrogram, linkage
+import seaborn as sns
 from config import config
 
 config.set_mode("default")
@@ -25,6 +31,42 @@ refined_merge_df = pd.merge(
 )
 
 # Show the result of the refined merge to check the outcome
-analysis_df_path = f'files/{F_NAME}_analysis_adaptability.xlsx'
+analysis_df_path = f'files/{F_NAME}_analysis_adaptability_combined.xlsx'
 refined_merge_df.to_excel(analysis_df_path, index=False)
 
+# Normalizing data for better comparison in the heatmap
+# Min-Max scaling to get values between 0 and 1
+heatmap_data = refined_merge_df[['Model', 'Rating_Single', 'Ranking']].set_index('Model')
+heatmap_data_normalized = (heatmap_data - heatmap_data.min()) / (heatmap_data.max() - heatmap_data.min())
+
+# Plotting the heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(heatmap_data_normalized, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Normalized Average Ranking and Rating Heatmap', fontsize=16)
+plt.ylabel('Model')
+plt.savefig(f'charts/{F_NAME}_rankvsrate_heatmap.png')
+# plt.show()
+
+# Generating a CDF plot for model ratings to assess adaptability
+plt.figure(figsize=(12, 8))
+
+unique_models = refined_merge_df['Model'].unique()
+for model in unique_models:
+    # Selecting ratings for the current model
+    model_ratings = refined_merge_df[refined_merge_df['Model'] == model]['Rating_Single']
+    # Generating CDF values
+    values, base = np.histogram(model_ratings, bins=40, density=True)
+    cumulative = np.cumsum(values)
+    # Plotting
+    plt.plot(base[:-1], cumulative, label=model)
+
+plt.title('CDF of Model Ratings for Adaptability', fontsize=16)
+plt.xlabel('Rating', fontsize=14)
+plt.ylabel('CDF', fontsize=14)
+plt.legend(title='Model')
+plt.grid(True)
+# Adjusting the layout and subtitle position
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.figtext(0.5, 0.01, 'Models that reach higher CDF values at lower ratings are generally more adaptable, as a larger proportion of their responses are rated highly.', fontsize=10, ha='center')
+plt.savefig(f'charts/{F_NAME}_rankvsrate_CDF.png')
+# plt.show()
