@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 from typing import List
 from config import config
 config.set_mode("default")
+F_NAME = config.F_NAME
 
 marvin.settings.openai.chat.completions.model = 'gpt-4'
 
@@ -44,7 +45,7 @@ def process_data(data):
         results.append(result_dict)
     return results
 
-input_file_path = config.combined_file_path
+input_file_path = f'files/{F_NAME}_combined_questions_responses.xlsx'
 output_file_path = config.model_rankings
 data = read_excel(input_file_path)
 ranking_results = process_data(data)
