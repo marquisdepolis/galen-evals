@@ -8,21 +8,22 @@ Evals for Drug Discovery
 
 # Steps
 1. Update the configfile.json if needed. Oh and check the knowledgebase.json and perturbations.json inside utils to see if they have verisimilitude!
-2. Run the responses_llm to get various OSS LLM responses, choose the ones you want in the code
-3. Run response_gpt4 to get GPT-4 responses
-4. Run results_convert to change format
+2. Run the perturbations file to get various OSS LLM responses, choose the ones you want in the code
+3. Run response_gpt4 same to get GPT-4 responses
+4. Do the same for DB and RAG files, having put the relevant parts in the folders
+5. Combine the results files, then change the format to select combined file
 5. Run eval_by_gpt4 to get GPT-4 to evaluate the answers
-6. Run eval_local_ranking to extract rankings from the evaluation (this is finicky)
+6. Run human eval if you can
 
 # Files
 The crucial ones are:
 1. questions.xlsx, which has the list of Questions we want to ask. This is the starting point, and what you should start with!
-2. llmeval_results.xlsx which has the final list of answers and evaluations from GPT-4
+2. "results grouped by question" which has the final list of answers from all LLMs
 3. model_rankings.xlsx with the rankings for the final list of answers that were evaluated
 4. All other files are intermediate creations, kept for auditing and any error checks
 
 # To do
-There's plenty to do, since it's a simple implementation, but in no order:
+There's plenty to do, but in no order:
 1. Change storage from csv to something better, and store them inside folders [Done]
 2. Clean up the answer formatting [Done]
 3. Speed up GPT execution by parallelising the API calls
