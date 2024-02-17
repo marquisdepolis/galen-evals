@@ -64,6 +64,15 @@ for result in ranking_results:
     print(result)
 
 ranking_df = pd.DataFrame(ranking_results)
-print(ranking_df)
+print(ranking_df['Rating'])
+
+def clean_and_average_rating(rating):
+    # Remove square brackets, split by comma, convert to float, and calculate average
+    ratings = rating.strip('[]').split(',')
+    average = sum([float(r) for r in ratings]) / len(ratings)
+    return average
+
+ranking_df['Rating'] = ranking_df['Rating'].apply(clean_and_average_rating)
+
 ranking_df.to_excel(output_file_path, index=False)
 print(f"Ranking results saved to {output_file_path}")
