@@ -39,7 +39,7 @@ def process_data(data):
     results = []
     n=3
     additional_columns = ['Category', 'Type']  # Add any other additional columns here
-    for _, row in data.head(n).iterrows():
+    for _, row in data.iterrows():
         question = concatenate_question_model_response(row, data)
         models = [col for col in data.columns if col not in ['Question'] + additional_columns]
         answers = [row[model] for model in models if pd.notna(row[model])]
