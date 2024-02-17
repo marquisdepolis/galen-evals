@@ -32,8 +32,9 @@ def read_excel(file_path):
 
 def process_data(data):
     results = []
+    n=3
     additional_columns = ['Category', 'Type']  # Add any other additional columns here
-    for _, row in data.iterrows():
+    for _, row in data.head(n).iterrows():
         question = row['Question']
         models = [col for col in data.columns if col not in ['Question'] + additional_columns]
         answers = [row[model] for model in models if pd.notna(row[model])]
