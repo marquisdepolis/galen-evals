@@ -16,6 +16,12 @@ A coworker for life sciences
 5. Run eval_by_gpt4 to get GPT-4 to evaluate the answers
 6. Run human eval if you can
 
+# Charts!
+![Latency vs Ranking across models](image.png)
+Notice the cold start problem occasionally, but also the performance from Yi is wow!
+
+
+
 # Files
 The crucial ones are:
 1. questions.xlsx, which has the list of Questions we want to ask. This is the starting point, and what you should start with!
