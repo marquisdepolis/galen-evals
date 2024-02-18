@@ -2,10 +2,13 @@
 A coworker for life sciences
 - one who also shows you their work and tells you what to choose!
 
+Most work we do in professional settings are task based  Sure, we hire people based on how well they did in abstract tests like GMAT, but what they do are tasks. And tasks are what we need to test any automation against. The next generation of AIs will have to be anle to do tasks, amd they'll have to be tested on them. We learnt this the hard way, starting with dreams of training a cool model before figuring out what's actually needed! That's the purpose of this repo, to test LLMs against a set list of tasks and to evaluate them.
+
 # What you need to run this
 1. OpenAI API key
 2. Replicate API key
 3. Add them to your .env file
+4. A list of questions that are relevant to your job
 
 # Steps
 1. Update the configfile.json if needed. Oh and check the knowledgebase.json and perturbations.json inside utils to see if they have verisimilitude!
@@ -31,7 +34,7 @@ GPT is the one that's solved cold start problem the best
 
 # Files
 The crucial ones are:
-1. questions.xlsx, which has the list of Questions we want to ask. This is the starting point, and what you should start with!
+1. questions.xlsx, which has the list of Questions we want to ask. This is the starting point, and what you should generate from your job!
 2. "results grouped by question" which has the final list of answers from all LLMs
 3. model_rankings.xlsx with the rankings for the final list of answers that were evaluated
 4. All other files are intermediate creations, kept for auditing and any error checks
@@ -46,3 +49,5 @@ There's plenty to do, but in no order:
 6. Create a way to perturb the questions to see how well the LLMs react to new info coming in [Done]
 7. Create a way to provide a "knowledgebase" to see how good the LLMs are at asking for help from the right quarters [Done]
 8. Add answer clusters and plotting w.r.t categories to the automated model ranking file
+9. Create tests against other hosting services and more LLMs
+10. Create a test for tasks that combine the abilities together - search/ doc reading/ coding etc
