@@ -1,6 +1,5 @@
 # galen-evals
-A coworker for life sciences
-- one who also shows you their work and tells you what to choose!
+A coworker for life sciences!
 
 Most work we do in professional settings are task based  Sure, we hire people based on how well they did in abstract tests like GMAT, but what they do are tasks. And tasks are what we need to test any automation against. The next generation of AIs will have to be anle to do tasks, amd they'll have to be tested on them. We learnt this the hard way, starting with dreams of training a cool model before figuring out what's actually needed! That's the purpose of this repo, to test LLMs against a set list of tasks and to evaluate them.
 
