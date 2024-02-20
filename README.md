@@ -42,13 +42,12 @@ The crucial ones are:
 
 # To do
 There's plenty to do, but in no order:
-1. Change storage from csv to something better, and store them inside folders [Done]
-2. Clean up the answer formatting [Done]
+1. Create a test for tasks that combine the abilities together - search/ doc reading/ coding etc
+2. Create tests against other hosting services (and more LLMs)
 3. Speed up GPT execution by parallelising the API calls
-4. Add checks against local files for specific models
-5. Create a "Best Answer" for the questions in case we want to measure the answers against that - (can also use this to DPO the models later as needed)
-6. Create a way to perturb the questions to see how well the LLMs react to new info coming in [Done]
-7. Create a way to provide a "knowledgebase" to see how good the LLMs are at asking for help from the right quarters [Done]
-8. Add answer clusters and plotting w.r.t categories to the automated model ranking file
-9. Create tests against other hosting services and more LLMs
-10. Create a test for tasks that combine the abilities together - search/ doc reading/ coding etc
+4. Create "knowledgebase" and "perturbations" automatically from given information/ documents
+5. Enable LLMs to write reports on a given topic, and then run PageRank on it afterwards based on RAG over a question set on it
+6. Create a "Best Answer" for the questions in case we want to measure the answers against that - (can also use this to DPO the models later as needed)
+7. Create a way to perturb the questions to see how well the LLMs react to new info coming in [Done]
+8. Create a way to provide a "knowledgebase" to see how good the LLMs are at asking for help from the right quarters [Done]
+9. Add answer clusters and plotting w.r.t categories to the automated model ranking file
