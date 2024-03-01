@@ -7,7 +7,7 @@ class Config:
         self.configuration = self.load_config()
         self.F_NAME = self.configuration["name"]
         self.INSTRUCTION = self.configuration['instructions']
-        self.GPT_MODEL = self.configuration["GPT_MODEL"]
+        self.GPT_MODEL = self.configuration["GPT_4"]
         self.perturbations = 'utils/perturbations.json'
         self.knowledgebase = 'utils/knowledgebase.json'
         self.db_layout = 'utils/database_description.json'
