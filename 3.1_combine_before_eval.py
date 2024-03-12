@@ -4,9 +4,9 @@ from config import config
 
 F_NAME = config.F_NAME
 # File paths
-db_file_path = 'files/galen_results_grouped_by_question_db.xlsx'
-dynamic_file_path = 'files/galen_results_grouped_by_question_dynamic.xlsx'
-rag_file_path = 'files/galen_results_grouped_by_question_rag.xlsx'
+db_file_path = f'files/{F_NAME}_results_grouped_by_question_db.xlsx'
+dynamic_file_path = f'files/{F_NAME}_results_grouped_by_question_dynamic.xlsx'
+rag_file_path = f'files/{F_NAME}_results_grouped_by_question_rag.xlsx'
 
 # Load the Excel files
 db_df = pd.read_excel(db_file_path)
