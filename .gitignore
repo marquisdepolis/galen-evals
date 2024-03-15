@@ -158,3 +158,4 @@ test-1.ipynb
 files/#Archive/*
 files/Papers_FullText/*
 rag_responses_with_details.xlsx
+__pycache__
